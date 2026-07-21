@@ -121,12 +121,10 @@ export const MarqueeSection: React.FC = () => {
       {/* Section Header */}
       <div className="max-w-6xl mx-auto px-6 text-center mb-10 sm:mb-14">
         <FadeIn delay={0} y={30}>
-          <h2 className={`font-black uppercase text-center leading-none tracking-tight mb-4 ${
-            isLight
-              ? 'text-slate-900 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-800'
-              : 'text-white bg-clip-text text-transparent bg-gradient-to-r from-white via-[#D7E2EA] to-purple-200'
-          }`}
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}>
+          <h2
+            className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-4"
+            style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}
+          >
             Skills & Stack
           </h2>
           <p className={`text-xs sm:text-sm md:text-base max-w-xl mx-auto uppercase tracking-widest font-bold ${isLight ? 'text-slate-700' : 'text-[#D7E2EA]/70'
@@ -146,12 +144,12 @@ export const MarqueeSection: React.FC = () => {
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.94 }}
                 className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all duration-300 border ${isSelected
-                    ? isLight
-                      ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
-                      : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
-                    : isLight
-                      ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
-                      : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
+                  ? isLight
+                    ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
+                    : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
+                  : isLight
+                    ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
+                    : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
                   }`}
               >
                 {cat}

@@ -28,7 +28,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   className = "",
   style
 }) => {
-  const Component = motion.create(as as any);
+  const Component = (motion[as as keyof typeof motion] || motion.div) as any;
 
   return (
     <Component
