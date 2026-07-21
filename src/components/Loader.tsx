@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 interface LoaderProps {
@@ -6,7 +6,6 @@ interface LoaderProps {
 }
 
 export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
-  const [, setShowName] = useState(false);
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -23,21 +22,14 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     playVideos();
   }, []);
 
-  // Sequence: Video -> Reveal "NARUN" text -> Transition to Website
+  // Safety fallback timer to launch website if video takes longer than 3.5s
   useEffect(() => {
-    // 1. After 1.8s video playback, reveal "NARUN" text
-    const textTimer = setTimeout(() => {
-      setShowName(true);
-    }, 1800);
-
-    // 2. After "NARUN" text is shown (at 3.5s total), complete loading and reveal website
-    const completeTimer = setTimeout(() => {
+    const fallbackTimer = setTimeout(() => {
       onComplete();
     }, 3500);
 
     return () => {
-      clearTimeout(textTimer);
-      clearTimeout(completeTimer);
+      clearTimeout(fallbackTimer);
     };
   }, [onComplete]);
 
@@ -59,10 +51,10 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       <video
         ref={desktopVideoRef}
         autoPlay
-        loop
         muted
         playsInline
         preload="auto"
+        onEnded={onComplete}
         className="absolute inset-0 w-full h-full object-cover z-0 hidden [@media(min-aspect-ratio:1/1)]:block"
       >
         <source src="/video_loading_16-9.mp4" type="video/mp4" />
@@ -72,10 +64,10 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       <video
         ref={mobileVideoRef}
         autoPlay
-        loop
         muted
         playsInline
         preload="auto"
+        onEnded={onComplete}
         className="absolute inset-0 w-full h-full object-cover z-0 block [@media(min-aspect-ratio:1/1)]:hidden"
       >
         <source src="/video_loading_9-16.mp4" type="video/mp4" />

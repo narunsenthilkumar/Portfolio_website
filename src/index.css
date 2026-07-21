@@ -9,7 +9,7 @@
   --text-primary: #D7E2EA;
   --text-muted: rgba(215, 226, 234, 0.65);
   --border-subtle: rgba(215, 226, 234, 0.1);
-  --hero-heading-gradient: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  --hero-heading-gradient: linear-gradient(180deg, #FFFFFF 0%, #BBCCD7 100%);
   --accent-btn-gradient: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
   --spline-filter: none;
 }

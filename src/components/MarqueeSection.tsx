@@ -12,12 +12,14 @@ interface TechItem {
 }
 
 const TECH_ITEMS: TechItem[] = [
-  // Row 1 (14 items)
+  // Row 1 (16 items)
   { name: "C", category: "Language", context: "Low-Level Systems & Embedded C", color: "#00599C" },
   { name: "C++", category: "Language", context: "High Performance & Algorithms", color: "#00599C" },
   { name: "Python", category: "Language", context: "AI, Data Science & Scripting", color: "#3776AB" },
   { name: "JavaScript", category: "Language", context: "Interactive Web & Async Logic", color: "#F7DF1E" },
   { name: "TypeScript", category: "Language", context: "Type-Safe Scalable Codebases", color: "#3178C6" },
+  { name: "Algorithms & DS", category: "Skills", context: "Data Structures & Runtime Optimization", color: "#EC4899" },
+  { name: "System Design", category: "Skills", context: "Distributed & Scalable Software Systems", color: "#3B82F6" },
   { name: "HTML5 / CSS3", category: "Frontend", context: "Semantic Markup & Modern Styling", color: "#E34F26" },
   { name: "React", category: "Frontend", context: "Modern UI Component Systems", color: "#61DAFB" },
   { name: "Tailwind CSS", category: "Frontend", context: "Utility-First Responsive Styling", color: "#06B6D4" },
@@ -28,7 +30,9 @@ const TECH_ITEMS: TechItem[] = [
   { name: "PyTorch", category: "AI & ML", context: "Tensor Compute & Model Training", color: "#EE4C2C" },
   { name: "Keras", category: "AI & ML", context: "High-Level Neural Network API", color: "#D00000" },
 
-  // Row 2 (13 items)
+  // Row 2 (15 items)
+  { name: "Software Engineering", category: "Skills", context: "Agile Development, Clean Code & Patterns", color: "#8B5CF6" },
+  { name: "Problem Solving", category: "Skills", context: "Analytical Debugging & Optimization", color: "#10B981" },
   { name: "Pandas", category: "Data Science", context: "Data Wrangling & Dataframes", color: "#150458" },
   { name: "NumPy", category: "Data Science", context: "Numerical Arrays & Math", color: "#013243" },
   { name: "Matplotlib", category: "Data Science", context: "Scientific Data Visualization", color: "#11557C" },
@@ -44,7 +48,7 @@ const TECH_ITEMS: TechItem[] = [
   { name: "Flutter", category: "Mobile", context: "Cross-Platform Mobile Apps", color: "#02569B" }
 ];
 
-const CATEGORIES = ["ALL", "Language", "Frontend", "Backend", "AI & ML", "Data Science", "Database", "Cloud", "DevOps", "Game Dev", "Mobile", "Design"];
+const CATEGORIES = ["ALL", "Skills", "Language", "Frontend", "Backend", "AI & ML", "Data Science", "Database", "Cloud", "DevOps", "Game Dev", "Mobile", "Design"];
 
 export const MarqueeSection: React.FC = () => {
   const { theme } = useTheme();
@@ -83,7 +87,7 @@ export const MarqueeSection: React.FC = () => {
   }, []);
 
   // Continuous animation loop using rAF for butter-smooth translation loop
-  const [translateXRight, setTranslateXRight] = useState(-2200);
+  const [translateXRight, setTranslateXRight] = useState(-2600);
   const [translateXLeft, setTranslateXLeft] = useState(0);
 
   useEffect(() => {
@@ -94,12 +98,12 @@ export const MarqueeSection: React.FC = () => {
 
       setTranslateXRight(prev => {
         const next = prev + baseSpeed;
-        return next >= 0 ? -2200 : next;
+        return next >= 0 ? -2600 : next;
       });
 
       setTranslateXLeft(prev => {
         const next = prev - baseSpeed;
-        return next <= -2200 ? 0 : next;
+        return next <= -2600 ? 0 : next;
       });
 
       animId = requestAnimationFrame(animate);
@@ -117,7 +121,11 @@ export const MarqueeSection: React.FC = () => {
       {/* Section Header */}
       <div className="max-w-6xl mx-auto px-6 text-center mb-10 sm:mb-14">
         <FadeIn delay={0} y={30}>
-          <h2 className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-4"
+          <h2 className={`font-black uppercase text-center leading-none tracking-tight mb-4 ${
+            isLight
+              ? 'text-slate-900 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-800'
+              : 'text-white bg-clip-text text-transparent bg-gradient-to-r from-white via-[#D7E2EA] to-purple-200'
+          }`}
             style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}>
             Skills & Stack
           </h2>
@@ -138,12 +146,12 @@ export const MarqueeSection: React.FC = () => {
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.94 }}
                 className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all duration-300 border ${isSelected
-                  ? isLight
-                    ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
-                    : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
-                  : isLight
-                    ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
-                    : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
+                    ? isLight
+                      ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
+                      : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
+                    : isLight
+                      ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
+                      : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
                   }`}
               >
                 {cat}
