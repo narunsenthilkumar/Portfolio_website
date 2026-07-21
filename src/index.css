@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0C0C0C;
+  --bg-secondary: #141414;
+  --bg-card: #161616;
+  --text-primary: #D7E2EA;
+  --text-muted: rgba(215, 226, 234, 0.65);
+  --border-subtle: rgba(215, 226, 234, 0.1);
+  --hero-heading-gradient: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  --accent-btn-gradient: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+  --spline-filter: none;
+}
+
+html.light-theme {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-muted: #334155;
+  --border-subtle: rgba(99, 102, 241, 0.2);
+  --hero-heading-gradient: linear-gradient(180deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%);
+  --accent-btn-gradient: linear-gradient(123deg, #312E81 0%, #4338CA 40%, #6D28D9 75%, #A855F7 100%);
+  --spline-filter: none;
+}
+
+/* Smooth View Transition Circular Mask Setup */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Disable CSS transitions during View Transition snapshot capture to prevent double-animation flickering */
+html.disable-transitions,
+html.disable-transitions *,
+html.disable-transitions *::before,
+html.disable-transitions *::after {
+  transition: none !important;
+}
+
+/* Ensure iframe and certificate preview elements preserve native cursor for smooth interaction */
+iframe,
+.fixed iframe {
+  cursor: auto !important;
+}
+
+/* Global smooth transition when toggling themes */
+*, *::before, *::after {
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body,
+  #root {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Kanit', sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: clip;
+  }
+}
+
+spline-viewer {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.hero-heading {
+  background: var(--hero-heading-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
+
+/* Infinite horizontal marquee scroller */
+@keyframes marquee-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-horizontal 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

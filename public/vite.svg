@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="nLogoGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#B600A8" />
+      <stop offset="100%" stop-color="#FF007A" />
+    </linearGradient>
+
+    <radialGradient id="nLogoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#00F0FF" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Outer Radial Aura Glow -->
+  <circle cx="50" cy="50" r="46" fill="url(#nLogoGlow)" />
+
+  <!-- Abstract N Monogram (Left Pillar, Diagonal Bolt Cut, Right Pillar) -->
+  <g filter="drop-shadow(0px 0px 8px rgba(0,240,255,0.6))">
+    <!-- Left Vertical Pillar -->
+    <path d="M22 80V20H38V80H22Z" fill="url(#nLogoGradDark)" />
+    
+    <!-- Diagonal Kinetic Slash -->
+    <path d="M38 20L78 68V80H64L24 32V20H38Z" fill="url(#nLogoGradDark)" />
+
+    <!-- Right Vertical Pillar -->
+    <path d="M62 20H78V80H62V20Z" fill="url(#nLogoGradDark)" />
+
+    <!-- Sharp Flash Lightning Bolt Accent -->
+    <path d="M52 14L62 42H50L58 74L38 45H50L52 14Z" fill="#00F0FF" />
+  </g>
+</svg>
