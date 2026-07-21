@@ -113,6 +113,15 @@ spline-viewer {
   background: #64748B;
 }
 
+/* Hide scrollbars for smooth touch scroll galleries */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Infinite horizontal marquee scroller */
 @keyframes marquee-horizontal {
   0% {

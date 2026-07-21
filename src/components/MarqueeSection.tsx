@@ -12,41 +12,48 @@ interface TechItem {
 }
 
 const TECH_ITEMS: TechItem[] = [
-  // Row 1 (11 items)
+  // Row 1 (14 items)
   { name: "C", category: "Language", context: "Low-Level Systems & Embedded C", color: "#00599C" },
   { name: "C++", category: "Language", context: "High Performance & Algorithms", color: "#00599C" },
   { name: "Python", category: "Language", context: "AI, Data Science & Scripting", color: "#3776AB" },
   { name: "JavaScript", category: "Language", context: "Interactive Web & Async Logic", color: "#F7DF1E" },
+  { name: "TypeScript", category: "Language", context: "Type-Safe Scalable Codebases", color: "#3178C6" },
+  { name: "HTML5 / CSS3", category: "Frontend", context: "Semantic Markup & Modern Styling", color: "#E34F26" },
   { name: "React", category: "Frontend", context: "Modern UI Component Systems", color: "#61DAFB" },
+  { name: "Tailwind CSS", category: "Frontend", context: "Utility-First Responsive Styling", color: "#06B6D4" },
+  { name: "Three.js", category: "Frontend", context: "3D WebGL Graphics & Canvas Scenes", color: "#999999" },
   { name: "Node.js", category: "Backend", context: "RESTful APIs & Event Server", color: "#339933" },
+  { name: "Express.js", category: "Backend", context: "Web Servers & Middleware Architecture", color: "#606060" },
   { name: "TensorFlow", category: "AI & ML", context: "Neural Networks & Deep Learning", color: "#FF6F00" },
   { name: "PyTorch", category: "AI & ML", context: "Tensor Compute & Model Training", color: "#EE4C2C" },
   { name: "Keras", category: "AI & ML", context: "High-Level Neural Network API", color: "#D00000" },
+
+  // Row 2 (13 items)
   { name: "Pandas", category: "Data Science", context: "Data Wrangling & Dataframes", color: "#150458" },
   { name: "NumPy", category: "Data Science", context: "Numerical Arrays & Math", color: "#013243" },
-
-  // Row 2 (10 items)
   { name: "Matplotlib", category: "Data Science", context: "Scientific Data Visualization", color: "#11557C" },
   { name: "AWS", category: "Cloud", context: "Cloud Infrastructure & S3/EC2", color: "#FF9900" },
   { name: "Firebase", category: "Backend", context: "Realtime NoSQL & Auth Services", color: "#FFCA28" },
   { name: "MongoDB", category: "Database", context: "Document Database & Aggregations", color: "#47A248" },
   { name: "MySQL", category: "Database", context: "Relational Tables & SQL Queries", color: "#00758F" },
   { name: "Supabase", category: "Database", context: "PostgreSQL & Open Source Firebase", color: "#3ECF8E" },
+  { name: "Docker", category: "DevOps", context: "Containerization & Microservices", color: "#2496ED" },
+  { name: "Git", category: "DevOps", context: "Version Control & Branching", color: "#F05032" },
   { name: "Figma", category: "Design", context: "UI/UX Prototyping & Layouts", color: "#F24E1E" },
   { name: "Unity", category: "Game Dev", context: "3D Physics & Game Engines", color: "#808080" },
-  { name: "Flutter", category: "Mobile", context: "Cross-Platform Mobile Apps", color: "#02569B" },
-  { name: "Git", category: "DevOps", context: "Version Control & Branching", color: "#F05032" }
+  { name: "Flutter", category: "Mobile", context: "Cross-Platform Mobile Apps", color: "#02569B" }
 ];
 
-const CATEGORIES = ["ALL", "Language", "Frontend", "Backend", "AI & ML", "Data Science", "Database", "Cloud"];
+const CATEGORIES = ["ALL", "Language", "Frontend", "Backend", "AI & ML", "Data Science", "Database", "Cloud", "DevOps", "Game Dev", "Mobile", "Design"];
 
 export const MarqueeSection: React.FC = () => {
   const { theme } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
   const [isHoveredRow, setIsHoveredRow] = useState(false);
 
-  const row1 = TECH_ITEMS.slice(0, 11);
-  const row2 = TECH_ITEMS.slice(11);
+  const halfIndex = Math.ceil(TECH_ITEMS.length / 2);
+  const row1 = TECH_ITEMS.slice(0, halfIndex);
+  const row2 = TECH_ITEMS.slice(halfIndex);
 
   // Duplicated items for seamless marquee loop
   const quadrupledRow1 = [...row1, ...row1, ...row1, ...row1];
@@ -76,7 +83,7 @@ export const MarqueeSection: React.FC = () => {
   }, []);
 
   // Continuous animation loop using rAF for butter-smooth translation loop
-  const [translateXRight, setTranslateXRight] = useState(-1800);
+  const [translateXRight, setTranslateXRight] = useState(-2200);
   const [translateXLeft, setTranslateXLeft] = useState(0);
 
   useEffect(() => {
@@ -87,12 +94,12 @@ export const MarqueeSection: React.FC = () => {
 
       setTranslateXRight(prev => {
         const next = prev + baseSpeed;
-        return next >= 0 ? -1800 : next;
+        return next >= 0 ? -2200 : next;
       });
 
       setTranslateXLeft(prev => {
         const next = prev - baseSpeed;
-        return next <= -1800 ? 0 : next;
+        return next <= -2200 ? 0 : next;
       });
 
       animId = requestAnimationFrame(animate);
@@ -121,7 +128,7 @@ export const MarqueeSection: React.FC = () => {
         </FadeIn>
 
         {/* Animated Filter Category Pills */}
-        <FadeIn delay={0.2} y={20} className="flex flex-wrap justify-center gap-2 mt-8">
+        <FadeIn delay={0.2} y={20} className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mt-8">
           {CATEGORIES.map((cat, idx) => {
             const isSelected = selectedCategory === cat;
             return (
@@ -130,13 +137,13 @@ export const MarqueeSection: React.FC = () => {
                 onClick={() => setSelectedCategory(cat)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.94 }}
-                className={`text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 border ${isSelected
-                    ? isLight
-                      ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
-                      : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
-                    : isLight
-                      ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
-                      : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
+                className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all duration-300 border ${isSelected
+                  ? isLight
+                    ? 'bg-[#4338CA] text-white border-[#4338CA] shadow-[0_4px_15px_rgba(67,56,202,0.35)]'
+                    : 'bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-purple-500 shadow-[0_4px_15px_rgba(182,0,168,0.4)]'
+                  : isLight
+                    ? 'bg-white text-slate-800 border-slate-300 hover:border-[#4338CA] hover:bg-slate-50'
+                    : 'bg-[#141414] text-[#D7E2EA]/80 border-white/15 hover:border-purple-500/50 hover:text-white'
                   }`}
               >
                 {cat}

@@ -16,9 +16,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({ className = "", on
       const ctaSection = document.getElementById('cta');
       if (ctaSection) {
         ctaSection.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('open-cta-contact'));
-        }, 600);
+        window.dispatchEvent(new CustomEvent('open-cta-contact'));
       }
     }
   };

@@ -4,6 +4,17 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 export const CustomCursor: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchMobile, setIsTouchMobile] = useState(false);
+
+  useEffect(() => {
+    const checkTouchMobile = () => {
+      const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+      setIsTouchMobile(isMobile);
+    };
+    checkTouchMobile();
+    window.addEventListener('resize', checkTouchMobile);
+    return () => window.removeEventListener('resize', checkTouchMobile);
+  }, []);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -20,6 +31,8 @@ export const CustomCursor: React.FC = () => {
   const ringY = useTransform(springY, (val) => val - 18);
 
   useEffect(() => {
+    if (isTouchMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -38,9 +51,11 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isTouchMobile]);
 
   useEffect(() => {
+    if (isTouchMobile) return;
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -66,11 +81,11 @@ export const CustomCursor: React.FC = () => {
     return () => {
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [isTouchMobile]);
 
-  // Hide default cursor ONLY when custom cursor is actively visible
+  // Hide default cursor ONLY when custom cursor is actively visible on desktop pointer
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isTouchMobile) return;
 
     const style = document.createElement('style');
     style.id = 'hide-default-cursor';
@@ -86,9 +101,9 @@ export const CustomCursor: React.FC = () => {
       const el = document.getElementById('hide-default-cursor');
       if (el) el.remove();
     };
-  }, [isVisible]);
+  }, [isVisible, isTouchMobile]);
 
-  if (!isVisible) return null;
+  if (!isVisible || isTouchMobile) return null;
 
   return (
     <>
