@@ -6,7 +6,7 @@ interface LoaderProps {
 }
 
 export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
-  const [showName, setShowName] = useState(false);
+  const [, setShowName] = useState(false);
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
 
