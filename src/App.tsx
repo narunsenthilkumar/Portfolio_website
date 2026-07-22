@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HeroSection } from './components/HeroSection';
 import { MarqueeSection } from './components/MarqueeSection';
@@ -19,10 +19,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useTheme();
 
+  const handleLoaderComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <>
       <AnimatePresence mode="wait">
-        {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+        {isLoading && <Loader onComplete={handleLoaderComplete} />}
       </AnimatePresence>
 
       <div className={`relative w-full overflow-x-clip transition-colors duration-500 ${theme === 'dark' ? 'bg-[#0C0C0C] text-[#D7E2EA]' : 'bg-[#F8FAFC] text-[#0F172A]'
